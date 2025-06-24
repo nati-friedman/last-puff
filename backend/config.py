@@ -10,6 +10,7 @@ class Config:
     ENVIRONMENT = environ.get("ENVIRONMENT")
     FLASK_APP = environ.get("FLASK_APP")
     FLASK_DEBUG = environ.get("FLASK_DEBUG")
-    SQLALCHEMY_DATABASE_URI = environ.get("DATABASE_URL", "postgresql://user:pass@localhost/lastpuff")
-    SQLALCHEMY_TRACK_MODIFICATIONS = environ.get("SQLALCHEMY_TRACK_MODIFICATIONS")
-    SECRET_KEY = environ.get("SECRET_KEY", "dev_key")
+    SQLALCHEMY_DATABASE_URI = environ.get("DATABASE_URL") or \
+        "postgresql://user:password@localhost/lastpuff"
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SECRET_KEY = environ.get("SECRET_KEY") or "dev_key"
