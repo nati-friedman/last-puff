@@ -1,4 +1,4 @@
-from datetime import timezone, datetime
+from datetime import datetime
 from typing import Optional
 import sqlalchemy as sa
 import sqlalchemy.orm as so
@@ -23,8 +23,8 @@ class User(db.Model):
                                                 unique=True)
     email: so.Mapped[str] = so.mapped_column(sa.String(120), index=True,
                                              unique=True)
-    password_hash: so.Mapped[Optional[str]] = so.mapped_column(sa.String(256))
     quit_date: so.Mapped[datetime] = so.mapped_column(sa.DateTime)
+    password_hash: so.Mapped[Optional[str]] = so.mapped_column(sa.String(256))
     profile_id: so.Mapped[int] = so.mapped_column(sa.ForeignKey(Profile.id),
                                                   index=True)
 
@@ -32,7 +32,7 @@ class User(db.Model):
         back_populates='users')
 
     def __repr__(self):
-        return '<{}>'.format(self.username)
+        return '<{}, {}>'.format(self.username, self.quit_date)
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
