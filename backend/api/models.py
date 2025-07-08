@@ -10,4 +10,4 @@ class Profile(models.Model):
     daily_smokes = models.PositiveIntegerField(default=0)
 
     def __str__(self):
-        return f"Profile of {self.user}"
+        return f"Profile of {self.user.username}"
